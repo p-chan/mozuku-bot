@@ -17,7 +17,9 @@
     "botkit": "^0.7.0",
     "consola": "^2.3.0",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "google-images": "^2.1.0",
+    "random-int": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

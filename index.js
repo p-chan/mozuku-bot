@@ -2,6 +2,8 @@ const Botkit = require('botkit')
 const consola = require('consola')
 const dotenv = require('dotenv')
 const express = require('express')
+const GoogleImages = require('google-images')
+const randomInt = require('random-int')
 
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
@@ -9,6 +11,11 @@ const port = process.env.PORT || 3000
 if (env === 'development') {
   dotenv.config()
 }
+
+const googleImagesClient = new GoogleImages(
+  process.env.CUSTOM_SEARCH_ENGINE_ID,
+  process.env.GOOGLE_APIS_API_KEY
+)
 
 const app = express()
 
@@ -33,6 +40,16 @@ bot.startRTM(function(err, bot, payload) {
 
 controller.hears('ping', 'direct_mention', (bot, message) => {
   bot.reply(message, 'pong')
+})
+
+controller.hears('image (.+)$', 'direct_mention', (bot, message) => {
+  googleImagesClient
+    .search(message.match[1], {
+      safe: 'high'
+    })
+    .then((images) => {
+      bot.reply(message, images[randomInt(9)].url)
+    })
 })
 
 app.get('/ping', (req, res) => {
