@@ -2,8 +2,9 @@ const Botkit = require('botkit')
 const consola = require('consola')
 const dotenv = require('dotenv')
 const express = require('express')
-const GoogleImages = require('google-images')
-const randomInt = require('random-int')
+const fs = require('fs')
+const path = require('path')
+const { promisify } = require('util')
 
 const env = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || 3000
@@ -11,11 +12,6 @@ const port = process.env.PORT || 3000
 if (env === 'development') {
   dotenv.config()
 }
-
-const googleImagesClient = new GoogleImages(
-  process.env.CUSTOM_SEARCH_ENGINE_ID,
-  process.env.GOOGLE_APIS_API_KEY
-)
 
 const app = express()
 
@@ -37,20 +33,13 @@ bot.startRTM(function(err, bot, payload) {
   consola.success(`Connect to ${payload.team.domain}.slack.com`)
   consola.success(`My name is @${payload.self.name}`)
 })
-
-controller.hears('ping', 'direct_mention', (bot, message) => {
-  bot.reply(message, 'pong')
-})
-
-controller.hears('image (.+)$', 'direct_mention', (bot, message) => {
-  googleImagesClient
-    .search(message.match[1], {
-      safe: 'high'
-    })
-    .then((images) => {
-      bot.reply(message, images[randomInt(9)].url)
-    })
-})
+;(async () => {
+  const skills = await promisify(fs.readdir)('./skills')
+  skills.map((e, i, a) => {
+    const skill = path.resolve(__dirname, './skills', e)
+    require(skill).execute(controller)
+  })
+})()
 
 app.get('/ping', (req, res) => {
   res.send('pong')
