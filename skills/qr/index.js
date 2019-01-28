@@ -4,6 +4,7 @@ const path = require('path')
 const QRCode = require('qrcode')
 const util = require('util')
 const uuidv4 = require('uuid/v4')
+const HTMLDecoderEncoder = require('html-encoder-decoder')
 
 module.exports = {
   name: 'qr',
@@ -17,7 +18,7 @@ module.exports = {
       const fileTypes = ['png', 'svg']
 
       const id = uuidv4()
-      const str = message.match[1]
+      const str = HTMLDecoderEncoder.decode(message.match[1])
       const filePath = path.resolve(process.cwd(), `./tmp/qr/${id}`)
 
       await mkdirpPromise(path.resolve(process.cwd(), './tmp/qr'))
