@@ -1,6 +1,7 @@
 const consola = require('consola')
 const getenv = require('./getenv')
 const got = require('got')
+const qs = require('qs')
 
 module.exports = {
   event: async ({
@@ -15,7 +16,7 @@ module.exports = {
     }
 
     try {
-      if (process.env.GOOGLE_ANALYTICS_TRACKING_ID) {
+      if (!process.env.GOOGLE_ANALYTICS_TRACKING_ID) {
         throw new Error('Google Analytics Tracking ID is required')
       }
 
@@ -40,8 +41,8 @@ module.exports = {
         data.ev = value
       }
 
-      return await got.post('http://www.google-analytics.com/collect', {
-        form: data
+      return await got.post('https://www.google-analytics.com/collect', {
+        body: qs.stringify(data)
       })
     } catch (e) {
       return consola.error(e.message)
