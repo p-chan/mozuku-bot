@@ -1,10 +1,11 @@
 const fs = require('fs')
+const ga = require('../../utils/ga')
+const HTMLDecoderEncoder = require('html-encoder-decoder')
 const mkdirp = require('mkdirp')
 const path = require('path')
 const QRCode = require('qrcode')
 const util = require('util')
 const uuidv4 = require('uuid/v4')
-const HTMLDecoderEncoder = require('html-encoder-decoder')
 
 module.exports = {
   name: 'qr',
@@ -12,6 +13,12 @@ module.exports = {
   usage: '@mozuku qr [keyword]',
   execute: controller => {
     controller.hears('qr (.+)$', 'direct_mention', async (bot, message) => {
+      await ga.event({
+        category: 'skill',
+        action: 'ping',
+        uid: message.user
+      })
+
       const mkdirpPromise = util.promisify(mkdirp)
       const botAPIFilesUploadPromise = util.promisify(bot.api.files.upload)
 

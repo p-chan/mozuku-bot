@@ -1,3 +1,4 @@
+const ga = require('../../utils/ga')
 const GoogleImages = require('google-images')
 const randomInt = require('random-int')
 
@@ -11,7 +12,13 @@ module.exports = {
   description: '検索結果にマッチした画像のURLを返します',
   usage: '@mozuku image [keyword]',
   execute: controller => {
-    controller.hears('image (.+)$', 'direct_mention', (bot, message) => {
+    controller.hears('image (.+)$', 'direct_mention', async (bot, message) => {
+      await ga.event({
+        category: 'skill',
+        action: 'ping',
+        uid: message.user
+      })
+
       googleImagesClient
         .search(message.match[1], {
           safe: 'high'
