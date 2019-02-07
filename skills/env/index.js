@@ -1,21 +1,22 @@
 const ga = require('../../utils/ga')
+const getenv = require('../../utils/getenv')
 
 module.exports = {
-  name: 'ping',
-  description: '`pong` を返します',
-  usage: '@mozuku ping',
+  name: 'env',
+  description: '動作環境を返します',
+  usage: '@mozuku env',
   execute: controller => {
     controller.hears(
-      'ping',
+      'env',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
         await ga({
           category: 'skill',
-          action: 'ping',
+          action: 'env',
           uid: message.user
         })
 
-        bot.reply(message, 'pong')
+        bot.reply(message, getenv())
       }
     )
   }
