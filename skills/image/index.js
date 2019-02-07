@@ -10,13 +10,13 @@ module.exports = {
   name: 'image',
   description: '検索結果にマッチした画像のURLを返します',
   usage: '@mozuku image [keyword]',
-  execute: (controller) => {
+  execute: controller => {
     controller.hears('image (.+)$', 'direct_mention', (bot, message) => {
       googleImagesClient
         .search(message.match[1], {
           safe: 'high'
         })
-        .then((images) => {
+        .then(images => {
           bot.reply(message, images[randomInt(9)].url)
         })
     })

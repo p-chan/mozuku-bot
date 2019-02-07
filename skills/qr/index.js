@@ -10,7 +10,7 @@ module.exports = {
   name: 'qr',
   description: 'QRコードを生成します',
   usage: '@mozuku qr [keyword]',
-  execute: (controller) => {
+  execute: controller => {
     controller.hears('qr (.+)$', 'direct_mention', async (bot, message) => {
       const mkdirpPromise = util.promisify(mkdirp)
       const botAPIFilesUploadPromise = util.promisify(bot.api.files.upload)

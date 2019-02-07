@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "node .",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "format": "prettier --write \"./**/*.js\""
   },
   "dependencies": {
     "botkit": "^0.7.0",
@@ -27,7 +28,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "prettier": "1.16.4"
   },
   "private": true
 }

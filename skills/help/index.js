@@ -7,7 +7,7 @@ module.exports = {
   name: 'help',
   description: '実行できる全てのスキルを返します',
   usage: '@mozuku help',
-  execute: async (controller) => {
+  execute: async controller => {
     const fields = []
     const skillsPath = path.resolve(__dirname, '../')
     const skills = await promisify(fs.readdir)(skillsPath)
