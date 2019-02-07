@@ -10,7 +10,7 @@ module.exports = {
       'env',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga.event({
+        await ga({
           category: 'skill',
           action: 'env',
           uid: message.user

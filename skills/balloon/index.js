@@ -10,7 +10,7 @@ module.exports = {
       'balloon (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga.event({
+        await ga({
           category: 'skill',
           action: 'balloon',
           uid: message.user

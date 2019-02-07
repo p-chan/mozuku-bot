@@ -16,7 +16,7 @@ module.exports = {
       'qr (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga.event({
+        await ga({
           category: 'skill',
           action: 'qr',
           uid: message.user

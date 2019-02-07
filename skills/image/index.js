@@ -16,7 +16,7 @@ module.exports = {
       'image (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga.event({
+        await ga({
           category: 'skill',
           action: 'image',
           uid: message.user
