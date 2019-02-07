@@ -1,7 +1,8 @@
+const { promisify } = require('util')
 const fs = require('fs')
+const ga = require('../../utils/ga')
 const package = require('../../package')
 const path = require('path')
-const { promisify } = require('util')
 
 module.exports = {
   name: 'help',
@@ -22,15 +23,25 @@ module.exports = {
       fields[i].short = false
     })
 
-    controller.hears('help', 'direct_mention', (bot, message) => {
-      bot.reply(message, {
-        attachments: [
-          {
-            fields: fields,
-            footer: `${package.name} v${package.version}`
-          }
-        ]
-      })
-    })
+    controller.hears(
+      'help',
+      ['direct_message', 'direct_mention'],
+      async (bot, message) => {
+        await ga({
+          category: 'skill',
+          action: 'help',
+          uid: message.user
+        })
+
+        bot.reply(message, {
+          attachments: [
+            {
+              fields: fields,
+              footer: `${package.name} v${package.version}`
+            }
+          ]
+        })
+      }
+    )
   }
 }
