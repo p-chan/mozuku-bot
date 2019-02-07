@@ -10,7 +10,10 @@ module.exports = async ({
   value = null,
   uid = null
 } = {}) => {
-  if (getenv() !== 'production' || !process.env.GOOGLE_ANALYTICS_TRACKING) {
+  if (
+    getenv() !== 'production' ||
+    process.env.GOOGLE_ANALYTICS_TRACKING !== 'true'
+  ) {
     return
   }
 
