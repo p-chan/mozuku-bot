@@ -3,10 +3,11 @@ const consola = require('consola')
 const dotenv = require('dotenv')
 const express = require('express')
 const fs = require('fs')
+const getenv = require('./utils/getenv')
 const path = require('path')
 const { promisify } = require('util')
 
-const env = process.env.NODE_ENV || 'development'
+const env = getenv()
 const port = process.env.PORT || 3000
 
 if (env === 'development') {
