@@ -8,7 +8,7 @@ module.exports = {
   execute: controller => {
     controller.hears(
       'balloon (.+)$',
-      'direct_mention',
+      ['direct_message', 'direct_mention'],
       async (bot, message) => {
         await ga.event({
           category: 'skill',

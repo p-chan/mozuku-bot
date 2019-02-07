@@ -23,21 +23,25 @@ module.exports = {
       fields[i].short = false
     })
 
-    controller.hears('help', 'direct_mention', async (bot, message) => {
-      await ga.event({
-        category: 'skill',
-        action: 'ping',
-        uid: message.user
-      })
+    controller.hears(
+      'help',
+      ['direct_message', 'direct_mention'],
+      async (bot, message) => {
+        await ga.event({
+          category: 'skill',
+          action: 'ping',
+          uid: message.user
+        })
 
-      bot.reply(message, {
-        attachments: [
-          {
-            fields: fields,
-            footer: `${package.name} v${package.version}`
-          }
-        ]
-      })
-    })
+        bot.reply(message, {
+          attachments: [
+            {
+              fields: fields,
+              footer: `${package.name} v${package.version}`
+            }
+          ]
+        })
+      }
+    )
   }
 }

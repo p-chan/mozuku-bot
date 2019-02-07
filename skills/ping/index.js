@@ -5,14 +5,18 @@ module.exports = {
   description: '`pong` を返します',
   usage: '@mozuku ping',
   execute: controller => {
-    controller.hears('ping', 'direct_mention', async (bot, message) => {
-      await ga.event({
-        category: 'skill',
-        action: 'ping',
-        uid: message.user
-      })
+    controller.hears(
+      'ping',
+      ['direct_message', 'direct_mention'],
+      async (bot, message) => {
+        await ga.event({
+          category: 'skill',
+          action: 'ping',
+          uid: message.user
+        })
 
-      bot.reply(message, 'pong')
-    })
+        bot.reply(message, 'pong')
+      }
+    )
   }
 }

@@ -12,20 +12,24 @@ module.exports = {
   description: '検索結果にマッチした画像のURLを返します',
   usage: '@mozuku image [keyword]',
   execute: controller => {
-    controller.hears('image (.+)$', 'direct_mention', async (bot, message) => {
-      await ga.event({
-        category: 'skill',
-        action: 'ping',
-        uid: message.user
-      })
+    controller.hears(
+      'image (.+)$',
+      ['direct_message', 'direct_mention'],
+      async (bot, message) => {
+        await ga.event({
+          category: 'skill',
+          action: 'ping',
+          uid: message.user
+        })
 
-      googleImagesClient
-        .search(message.match[1], {
-          safe: 'high'
-        })
-        .then(images => {
-          bot.reply(message, images[randomInt(9)].url)
-        })
-    })
+        googleImagesClient
+          .search(message.match[1], {
+            safe: 'high'
+          })
+          .then(images => {
+            bot.reply(message, images[randomInt(9)].url)
+          })
+      }
+    )
   }
 }
