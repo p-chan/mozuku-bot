@@ -18,7 +18,7 @@ module.exports = {
       async (bot, message) => {
         await ga.event({
           category: 'skill',
-          action: 'ping',
+          action: 'image',
           uid: message.user
         })
 
