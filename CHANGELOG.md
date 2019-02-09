@@ -4,6 +4,12 @@
 
 - No change
 
+## [1.1.0] - 2019-02-10
+
+### Added
+
+- Add ksk command
+
 ## [1.0.0] - 2019-02-10
 
 ### Added
