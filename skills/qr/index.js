@@ -27,8 +27,16 @@ module.exports = {
 
         const fileTypes = ['png', 'svg']
 
+        let target = message.match[1]
+        const firstStr = target.slice(0, 1)
+        const lastStr = target.slice(-1)
+
+        if (firstStr === '<' && lastStr === '>') {
+          target = target.slice(1).slice(0, -1)
+        }
+
         const id = uuidv4()
-        const str = HTMLDecoderEncoder.decode(message.match[1])
+        const str = HTMLDecoderEncoder.decode(target)
         const filePath = path.resolve(process.cwd(), `./tmp/qr/${id}`)
 
         await mkdirpPromise(path.resolve(process.cwd(), './tmp/qr'))

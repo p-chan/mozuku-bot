@@ -4,6 +4,12 @@
 
 - No change
 
+## [1.1.1] - 2019-02-15
+
+### Fixed
+
+- Fix a bug that `<` and `>` are mixed when entering URL in qr command
+
 ## [1.1.0] - 2019-02-10
 
 ### Added
