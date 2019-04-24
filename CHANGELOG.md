@@ -6,7 +6,12 @@
 
 ## [1.2.0] - 2019-04-24
 
+### Added
+
 - Add tube command
+
+### Fixed
+
 - Fix description of image command
 
 ## [1.1.1] - 2019-02-15
