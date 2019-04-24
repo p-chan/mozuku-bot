@@ -9,7 +9,7 @@ const googleImagesClient = new GoogleImages(
 
 module.exports = {
   name: 'image',
-  description: '検索結果にマッチした画像のURLを返します',
+  description: 'キーワードにマッチした画像のURLを返します',
   usage: '@mozuku image [keyword]',
   execute: controller => {
     controller.hears(
