@@ -4,6 +4,12 @@
 
 - No change
 
+## [1.3.0] - 2019-08-01
+
+### Added
+
+- Add random command
+
 ## [1.2.0] - 2019-04-24
 
 ### Added
