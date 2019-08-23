@@ -1,6 +1,6 @@
 {
   "name": "mozuku-bot",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "nyarn",
   "license": "UNLICENSED",
   "author": "P-Chan",
@@ -23,6 +23,7 @@
     "got": "^9.6.0",
     "html-encoder-decoder": "^1.3.8",
     "mkdirp": "^0.5.1",
+    "ojichat": "github:nerui/node-ojichat",
     "qrcode": "^1.3.3",
     "qs": "^6.6.0",
     "random-int": "^1.0.0",

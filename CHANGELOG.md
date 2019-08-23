@@ -4,6 +4,12 @@
 
 - No change
 
+## [1.4.0] - 2019-08-24
+
+### Added
+
+- Add ojisan command
+
 ## [1.3.0] - 2019-08-01
 
 ### Added
