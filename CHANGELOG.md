@@ -4,6 +4,17 @@
 
 - No change
 
+## [1.5.0] - 2019-09-07
+
+### Changed
+
+- Update deps
+
+### Removed
+
+- Remove tube command
+- Remove Google Analytics
+
 ## [1.4.0] - 2019-08-24
 
 ### Added
