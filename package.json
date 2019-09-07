@@ -15,7 +15,7 @@
     "format": "prettier --write \"./**/*.js\""
   },
   "dependencies": {
-    "botkit": "^4.5.0",
+    "botkit": "^0.7.4",
     "consola": "^2.10.1",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
