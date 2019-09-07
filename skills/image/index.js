@@ -1,4 +1,3 @@
-const ga = require('../../utils/ga')
 const GoogleImages = require('google-images')
 const randomInt = require('random-int')
 

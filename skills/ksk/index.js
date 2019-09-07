@@ -1,6 +1,3 @@
-const ga = require('../../utils/ga')
-const getenv = require('../../utils/getenv')
-
 const maxKskNum = 30
 
 module.exports = {
@@ -12,12 +9,6 @@ module.exports = {
       'ksk (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga({
-          category: 'skill',
-          action: 'ksk',
-          uid: message.user
-        })
-
         const kskNum = Number(message.match[1])
         let kskStr = ''
 

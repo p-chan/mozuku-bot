@@ -1,6 +1,5 @@
 const { promisify } = require('util')
 const fs = require('fs')
-const ga = require('../../utils/ga')
 const package = require('../../package')
 const path = require('path')
 

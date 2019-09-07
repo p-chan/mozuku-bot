@@ -1,4 +1,3 @@
-const ga = require('../../utils/ga')
 const getenv = require('../../utils/getenv')
 
 module.exports = {
@@ -10,12 +9,6 @@ module.exports = {
       'env',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga({
-          category: 'skill',
-          action: 'env',
-          uid: message.user
-        })
-
         bot.reply(message, getenv())
       }
     )

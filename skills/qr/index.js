@@ -1,5 +1,4 @@
 const fs = require('fs')
-const ga = require('../../utils/ga')
 const HTMLDecoderEncoder = require('html-encoder-decoder')
 const mkdirp = require('mkdirp')
 const path = require('path')
@@ -16,12 +15,6 @@ module.exports = {
       'qr (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga({
-          category: 'skill',
-          action: 'qr',
-          uid: message.user
-        })
-
         const mkdirpPromise = util.promisify(mkdirp)
         const botAPIFilesUploadPromise = util.promisify(bot.api.files.upload)
 

@@ -1,4 +1,3 @@
-const ga = require('../../utils/ga')
 const suddendeath = require('suddendeath')
 
 module.exports = {
@@ -10,12 +9,6 @@ module.exports = {
       'balloon (.+)$',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga({
-          category: 'skill',
-          action: 'balloon',
-          uid: message.user
-        })
-
         const str = `\`\`\`${suddendeath(message.match[1])}\`\`\``
         bot.reply(message, str)
       }
