@@ -26,12 +26,6 @@ module.exports = {
       'help',
       ['direct_message', 'direct_mention'],
       async (bot, message) => {
-        await ga({
-          category: 'skill',
-          action: 'help',
-          uid: message.user
-        })
-
         bot.reply(message, {
           attachments: [
             {
