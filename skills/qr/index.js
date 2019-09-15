@@ -4,12 +4,11 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const QRCode = require('qrcode')
 const util = require('util')
-const uuidv4 = require('uuid/v4')
 
 module.exports = {
   name: 'qr',
-  description: 'QRコードを生成します',
-  usage: '@mozuku qr [keyword]',
+  description: 'QRコードを生成します。誤り補正（QRコードのサイズ）、ファイル形式を指定する必要があります。',
+  usage: '@mozuku qr [-L | -M | -Q | -H] [-png | -svg] [keyword,keyword...]',
   execute: controller => {
     controller.hears(
       'qr (.+)$',
@@ -17,30 +16,45 @@ module.exports = {
       async (bot, message) => {
         const mkdirpPromise = util.promisify(mkdirp)
         const botAPIFilesUploadPromise = util.promisify(bot.api.files.upload)
-
-        const fileTypes = ['png', 'svg']
-
+        let fileType = 'png'
         let target = message.match[1]
-        const firstStr = target.slice(0, 1)
-        const lastStr = target.slice(-1)
+        let level = "M"
 
-        if (firstStr === '<' && lastStr === '>') {
-          target = target.slice(1).slice(0, -1)
+        if (/\s/.test(target)) {
+          target = target.split(/\s/);
+
+          for (let i = 0; i < target.length; i++) {
+            if (i == 0) {
+              level = target[0].slice(-1)
+              if (level !== 'L' && level !== 'M' && level !== 'Q' && level !== 'H') {
+                throw new Error("L、M、Q、Hのいずれかを入力");
+              }
+            }
+            if (i == 1) {
+              fileType = target[1].slice(1,4)
+            }
+            if (i == 2) {
+              const firstStr = target[2].slice(0, 1)
+              const lastStr = target[2].slice(-1)
+              if (firstStr === '<' && lastStr === '>') {
+                target = target[2].slice(1).slice(0, -1).split(",")
+              }
+            }
+          }
+        } else {
+          target = target.split(",")
         }
-
-        const id = uuidv4()
-        const str = HTMLDecoderEncoder.decode(target)
-        const filePath = path.resolve(process.cwd(), `./tmp/qr/${id}`)
 
         await mkdirpPromise(path.resolve(process.cwd(), './tmp/qr'))
 
-        for (let i = 0; i < fileTypes.length; i++) {
-          const fileType = fileTypes[i]
-
+        for (let j = 0; j < target.length; j++) {
+          let id = j
+          let filePath = path.resolve(process.cwd(), `./tmp/qr/${id}`)
+          let str = HTMLDecoderEncoder.decode(target[j])
           await QRCode.toFile(`${filePath}.${fileType}`, str, {
-            type: fileType
+            type: fileType,
+            errorCorrectionLevel: level
           })
-
           await botAPIFilesUploadPromise({
             file: fs.createReadStream(`${filePath}.${fileType}`),
             filename: `${id}.${fileType}`,
