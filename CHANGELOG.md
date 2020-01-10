@@ -4,6 +4,12 @@
 
 - No change
 
+## [1.6.0] - 2020-01-10
+
+### Removed
+
+- Remove ojisan command
+
 ## [1.5.1] - 2019-09-07
 
 ### Fixed
